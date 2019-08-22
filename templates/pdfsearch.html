@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WebSockets Client</title>
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+
+
+<style>
+
+    .searchbar{
+
+        padding: 10px;
+        margin-top: 10px;
+        width: 80%;
+        margin-left: -20px;
+         border-radius: 15px;
+        background: white;
+        border-color: #9fcdff;
+    }
+
+</style>
+
+{##}
+{#    <style>#}
+{#        html {#}
+{##}
+{#  margin: 40px auto;#}
+{#}#}
+{#.btn-search {#}
+{#	  background: #424242;#}
+{#	  border-radius: 0;#}
+{#	  color: #fff;#}
+{#	  border-width: 1px;#}
+{#	  border-style: solid;#}
+{#	  border-color: #1c1c1c;#}
+{#	}#}
+{#	.btn-search:link, .btn-search:visited {#}
+{#	  color: #fff;#}
+{#	}#}
+{#	.btn-search:active, .btn-search:hover {#}
+{#	  background: #1c1c1c;#}
+{#	  color: #fff;#}
+{#	}#}
+{#    </style>#}
+</head>
+<body>
+<!-----body Search Code-->
+{% if result %}
+
+<div class="container">
+{#    <br/>#}
+{#	<div class="row justify-content-center">#}
+{#                        <div class="col-12 col-md-10 col-lg-8">#}
+{#                            <form action = "http://localhost:5000/pdfsearched" method = "POST" class="card card-sm">#}
+{#                                <div id="send" class="card-body row no-gutters align-items-center">#}
+{#                                    <div class="col-auto">#}
+{#                                        <i class="fas fa-search h4 text-body"></i>#}
+{#                                    </div>#}
+{##}
+{##}
+{#                                    <textarea name="pdfnamearea" rows="1" hidden>{{ result }}</textarea>#}
+{#                                    <!--end of col-->#}
+{#                                    <div class="col">#}
+{#                                        <input name="searchquery" type="text" id="data" value={{ result }}   class="form-control form-control-lg form-control-borderless" placeholder="Search your query">#}
+{#                                    </div>#}
+{#                                    <!--end of col-->#}
+{#                                    <div class="col-auto">#}
+{#                                        <input type="submit" style="margin-left: 10px" id="sendtext" class="btn btn-lg btn-success" value="Search"/>#}
+{#                                    </div>#}
+{##}
+{#                                    <!--end of col-->#}
+{#                                </div>#}
+{#                            </form>#}
+{#                        </div>#}
+{#                        <!--end of col-->#}
+{#                    </div>#}
+{#</div>#}
+
+        <div class="row">
+
+        <div class="col-md-2">
+            <img height="65px" width=150px" src={{ img }}/>
+        </div>
+
+        <div class="col-md-8">
+             <form action = "http://localhost:5000/pdfsearched" method = "POST" class="card card-sm">
+                 <textarea name="pdfnamearea" rows="1" hidden>{{ result }}</textarea>
+                 <input name="searchquery" type="text" class="searchbar" placeholder="Search your query " value='{{ query }}' > </input>
+                 <input style="height: 40px ; margin: 10px" type="submit" value="Search" class="btn btn-info glyphicon glyphicon-search"/>
+
+             </form>
+        </div>
+
+    </div>
+<h4>Search contennt into {{ result }}</h4>
+
+</br>
+{% if output %}
+    <h3>Results Matched {{ searchresults }}</h3>
+{% for value in output %}
+
+    {% if value[1]>0 %}
+    <h4>{{ value[0] }}</h4>
+    {% endif%}
+{% endfor %}
+{% endif %}
+
+
+
+{% endif %}
+
+
+</div>
+
+
+</body>
+</html>

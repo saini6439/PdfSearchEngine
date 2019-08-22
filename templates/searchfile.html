@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search your Query</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<style>
+
+    .searchbar{
+
+        padding: 10px;
+        margin-top: 10px;
+        width: 80%;
+        margin-left: -20px;
+         border-radius: 15px;
+        background: white;
+        border-color: #9fcdff;
+    }
+
+</style>
+
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-md-2">
+            <img height="65px" width=150px" src={{ img }}/>
+        </div>
+
+        <div class="col-md-8">
+             <form action = "http://localhost:5000/result" method = "POST" class="card card-sm">
+            <input name="url" type="text" class="searchbar" placeholder={{ searchquery }} value='{{ searchquery }}'> </input>
+           <input style="height: 40px ; margin: 10px" type="submit" value="Search" class="btn btn-info glyphicon glyphicon-search"/>
+
+             </form>
+        </div>
+
+    </div>
+
+
+ <div class="row" style="margin:20px">
+     {% if result %}
+         <h3>Results Matched {{ searchedfiles }}</h3>
+         {% for value in result %}
+             {% if value[1]>0 %}
+
+                 <div align="center" class="col-sm-2 col-sm-offset-0">
+                     <a href="#"  class="thumbnail">
+                        <img class="img-responsive" src="https://timedotcom.files.wordpress.com/2015/06/521811839-copy.jpg"/>
+                    </a>
+                     <header class="entry-header">
+                         <h4 id="head4" align="center">{{ value[0] }}</h4 >
+
+                     </header>
+                   <form action = "http://localhost:5000/pdfsearch" method = "POST">
+
+                       <textarea name="pdfnamearea" hidden>{{ value[0] }}
+                        </textarea>
+
+                       <textarea name="query" hidden>{{ searchquery }}
+                        </textarea>
+                            <button type="submit" style="height: 30px ;" class="btn btn-info">Search</button>
+                    </form>
+                 </div>
+             {% endif %}
+         {% endfor %}
+
+{% endif %}
+ </div>
+</div>
+</body>
+</html>
